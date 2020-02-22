@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Move2D.cs" />
     <Compile Include="Assets\Scripts\RotateToCursor.cs" />
     <Compile Include="Assets\Scripts\Weapon.cs" />
+    <Compile Include="Assets\SwitchLevel.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Developement/Unity/2D/Magic Journey/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

@@ -4,39 +4,37 @@ using UnityEngine;
 
 public class FollowTarget : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     public Transform edgeOfWorld;
     public Transform edgeOfWorld2;
-
     public Transform player;
-    public float smoothSpeed = 0.25f;
+    public float smoothingSpeed;
     public Vector3 offset;
-    private float horizontalMin;
+
+    private float halfWidth;
 
     void Start()
     {
         Camera camera = Camera.main;
         float halfHeigth = camera.orthographicSize;
-        float halfWidth = camera.aspect * halfHeigth;
+        halfWidth = camera.aspect * halfHeigth;
 
-        horizontalMin = halfWidth;
+
     }
 
     void LateUpdate()
     {
-        if (transform.position.x - horizontalMin <= edgeOfWorld.position.x)
-        {
-            transform.position = transform.position;
-        }
-        else if(transform.position.x + horizontalMin >= edgeOfWorld2.position.x)
-        {
-            transform.position = transform.position;
-        }
-        else if(player.position.x >= edgeOfWorld.position.x + horizontalMin)
+        Vector3 tmpVec = player.position + offset;
+        if ((player.position.x >= edgeOfWorld.position.x + halfWidth) && (player.position.x <= edgeOfWorld2.position.x - halfWidth))
         {
 
-            transform.position = player.position + offset;
+            //while (transform.position != tmpVec)
+            //{
+            //    transform.position = Vector3.Lerp(tmpVec, transform.position, 0, 0001);
+            //}
+
+            transform.position = Vector3.Lerp(transform.position, player.position + offset, smoothingSpeed);
+            //Vector3.Lerp(transform.position, player.position + offset, smoothingSpeed);
         }
+
     }
 }

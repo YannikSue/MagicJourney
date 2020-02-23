@@ -1530,7 +1530,7 @@ GameObject:
   m_Layer: 0
   m_Name: EndingPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1587,6 +1587,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 1
+  start: 0
+  player: {fileID: 2069163204}
   animator: {fileID: 0}
 --- !u!1 &754309722
 GameObject:
@@ -3251,7 +3253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2348365023f410644933cb41aa94dafa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerUI: {fileID: 1580769601}
   animator: {fileID: 0}
   moveSpeed: 1.2
   isGrounded: 0
@@ -3262,6 +3263,8 @@ MonoBehaviour:
     m_Bits: 256
   groundCheck: {fileID: 686803654}
   startingPoint: {fileID: 1916937441}
+  endingPoint: {fileID: 747001105}
+  firstInit: 1
 --- !u!50 &2069163205
 Rigidbody2D:
   serializedVersion: 4

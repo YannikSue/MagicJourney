@@ -11,30 +11,34 @@ public class FollowTarget : MonoBehaviour
     public Vector3 offset;
 
     private float halfWidth;
-
+    private void Awake()
+    {
+        
+    }
     void Start()
     {
         Camera camera = Camera.main;
         float halfHeigth = camera.orthographicSize;
         halfWidth = camera.aspect * halfHeigth;
-
+        transform.position = player.position + offset;
+        Debug.Log("CameraPos: " + transform.position.ToString());
+        Debug.Log("PlayerPos: " + player.position);
 
     }
 
     void LateUpdate()
     {
+        smoothCamera();
+    }
+
+    void smoothCamera()
+    {
         Vector3 tmpVec = player.position + offset;
         if ((player.position.x >= edgeOfWorld.position.x + halfWidth) && (player.position.x <= edgeOfWorld2.position.x - halfWidth))
         {
-
-            //while (transform.position != tmpVec)
-            //{
-            //    transform.position = Vector3.Lerp(tmpVec, transform.position, 0, 0001);
-            //}
-
             transform.position = Vector3.Lerp(transform.position, player.position + offset, smoothingSpeed);
-            //Vector3.Lerp(transform.position, player.position + offset, smoothingSpeed);
-        }
+            Debug.Log("Camera lerps");
 
+        }
     }
 }

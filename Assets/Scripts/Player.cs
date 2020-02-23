@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     public bool firstInit = true;
     private bool facingRight = true;
+    public VectorValue startingPosition;
 
 
     // Start is called before the first frame update
@@ -37,23 +38,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        //if (startingPoint != null)
-        //{
-        //    transform.position = startingPoint.position;
-        //}
        
-        if (playerData.direction == "goingForward" || firstInit)
-        {
-            startingPoint.position = new Vector3(startingPoint.position.x + 2f, startingPoint.position.y + 1f);
-            transform.position = startingPoint.position;
-            Debug.Log("Start Position: " + transform.position.ToString());
-        }
-        else
-        {
-            endingPoint.position = new Vector3(endingPoint.position.x - 1f, endingPoint.position.y);
-            transform.position = endingPoint.position;
-            Debug.Log("End Position: " + transform.position.ToString());
-        }
+        transform.position = startingPosition.initialValue;
     }
 
     // Update is called once per frame

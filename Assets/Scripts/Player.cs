@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     public Transform endingPoint;
     //public bool goingBack { get; set; }
     private Rigidbody2D rb;
+
+    public GameObject projectile;
     public bool firstInit;
     private bool facingRight = true;
     public VectorValue startingPosition;
@@ -34,6 +36,7 @@ public class Player : MonoBehaviour
     private void OnDisable()
     {
         PlayerPersistence.StoreData(this);
+        
     }
     void Start()
     {
@@ -58,6 +61,8 @@ public class Player : MonoBehaviour
         isGrounded = Physics2D.OverlapArea(new Vector2(groundCheck.position.x, groundCheck.position.y), new Vector2(groundCheck.position.x + 0.5f, groundCheck.position.y - 0.51f), groundLayer);
         Jump();
         Dash();
+        CastSpell();
+        
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         if (Input.GetAxisRaw("Horizontal") > 0 && !facingRight)
         {
@@ -72,7 +77,6 @@ public class Player : MonoBehaviour
 
         }
         transform.position += movement * Time.deltaTime * moveSpeed;
-
     }
 
 
@@ -100,5 +104,12 @@ public class Player : MonoBehaviour
     {
         facingRight = !facingRight;
         transform.Rotate(0f, 180f, 0f);
+    }
+
+    void CastSpell() {
+        if(Input.GetMouseButtonDown(0)){
+            GameObject spell = Instantiate(projectile, this.transform.position, Quaternion.identity) as GameObject;
+            spell.GetComponent<Cast>().CastSpell(this.transform.position);
+        }
     }
 }

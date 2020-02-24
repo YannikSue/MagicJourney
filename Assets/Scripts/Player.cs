@@ -108,8 +108,8 @@ public class Player : MonoBehaviour
 
     void CastSpell() {
         if(Input.GetMouseButtonDown(0)){
-            GameObject spell = Instantiate(projectile, this.transform.position, Quaternion.identity) as GameObject;
-            spell.GetComponent<Cast>().CastSpell(this.transform.position);
+            GameObject spell = Instantiate(projectile, transform.position, Quaternion.identity);
+            spell.GetComponent<Cast>().CastSpell(transform.position);
         }
     }
 }

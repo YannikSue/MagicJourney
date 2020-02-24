@@ -3227,6 +3227,8 @@ MonoBehaviour:
   groundCheck: {fileID: 686803654}
   startingPoint: {fileID: 1916937441}
   endingPoint: {fileID: 0}
+  projectile: {fileID: 6426549534398020407, guid: 76a2e0da605da0b49b83b9bd60bd60b6,
+    type: 3}
   firstInit: 1
   startingPosition: {fileID: 11400000, guid: 9f60218f716eb1c4cbe76c1a71dfbc59, type: 2}
 --- !u!50 &2069163205

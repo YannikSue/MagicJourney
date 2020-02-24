@@ -6,6 +6,8 @@ public class NewFollowTarget : MonoBehaviour
 {
 
     public Transform target;
+    public Transform startPoint;
+    public Transform endPoint;
 
     Vector3 velocity = Vector3.zero;
 
@@ -23,6 +25,16 @@ public class NewFollowTarget : MonoBehaviour
 
     public bool XMinEnabled = false;
     public float XMinValue = 0;
+
+    private void Awake()
+    {
+        Camera camera = Camera.main;
+        float halfHeigth = camera.orthographicSize;
+        float halfWidth = camera.aspect * halfHeigth;
+        XMaxValue = endPoint.position.x - halfWidth;
+        XMinValue = startPoint.position.x + halfWidth;
+        Debug.Log("XMin: " + XMinValue + ", XMAX: " + XMaxValue);
+    }
 
     void FixedUpdate()
     {
@@ -42,10 +54,10 @@ public class NewFollowTarget : MonoBehaviour
 
         if (XMinEnabled && XMaxEnabled)
             targetPos.x = Mathf.Clamp(target.position.x, XMinValue, XMaxValue);
-        else if (XMinEnabled)
-            targetPos.x = Mathf.Clamp(target.position.x, XMinValue, target.position.x);
-        else if (XMaxEnabled)
-            targetPos.x = Mathf.Clamp(target.position.x, target.position.x, YMaxValue);
+        //else if (XMinEnabled)
+        //    targetPos.x = Mathf.Clamp(target.position.x, XMinValue, target.position.x);
+        //else if (XMaxEnabled)
+        //    targetPos.x = Mathf.Clamp(target.position.x, target.position.x, YMaxValue);
 
         targetPos.z = transform.position.z;
 

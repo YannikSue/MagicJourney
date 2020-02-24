@@ -920,15 +920,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2069163203}
+  startPoint: {fileID: 1375479029}
+  endPoint: {fileID: 336602642}
   smoothTime: 0.15
   YMaxEnabled: 0
   YMaxValue: 0
   YMinEnabled: 1
   YMinValue: -4
   XMaxEnabled: 1
-  XMaxValue: -1.724957
+  XMaxValue: 0
   XMinEnabled: 1
-  XMinValue: -4.652877
+  XMinValue: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -2521,7 +2523,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375479028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.676, y: -4.499, z: -7.3596964}
+  m_LocalPosition: {x: -6.654, y: -4.499, z: -7.3596964}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2540,7 +2542,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0038819313, y: 0.21448386}
+  m_Offset: {x: 0.011677742, y: 0.21448386}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2551,7 +2553,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.01395607, y: 1.4289677}
+  m_Size: {x: 0.029547691, y: 1.4289677}
   m_EdgeRadius: 0
 --- !u!1 &1580769597
 GameObject:

@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 
     public PlayerData playerData { get; private set; }
 
-  
+
     public Animator animator;
     public float moveSpeed = 5f;
     public bool isGrounded = false;
@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     public Transform endingPoint;
     //public bool goingBack { get; set; }
     private Rigidbody2D rb;
-    public bool firstInit = true;
+    public bool firstInit;
     private bool facingRight = true;
     public VectorValue startingPosition;
 
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         playerData = PlayerPersistence.LoadData();
-        
+
     }
 
     private void OnDisable()
@@ -38,8 +38,18 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-       
-        transform.position = startingPosition.initialValue;
+
+        if (playerData.direction == "goingRight")
+        {
+            //Vector3 offset = new Vector3(1f, -1.5f, transform.position.z);
+            transform.position = startingPoint.position;
+            
+        }
+        else if(playerData.direction == "goingLeft")
+        {
+
+            transform.position = startingPosition.initialValue;
+        }
     }
 
     // Update is called once per frame
@@ -62,7 +72,7 @@ public class Player : MonoBehaviour
 
         }
         transform.position += movement * Time.deltaTime * moveSpeed;
-   
+
     }
 
 

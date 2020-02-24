@@ -398,7 +398,7 @@ Transform:
   m_Children:
   - {fileID: 1608500483}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &351330881
 Animator:
@@ -673,7 +673,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380242488}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -700,11 +700,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380242488}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.676, y: -4.499, z: -7.3596964}
+  m_LocalPosition: {x: -6.447, y: -4.499, z: -7.3596964}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &423303974
 GameObject:
@@ -1357,7 +1357,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1084531997
 BoxCollider2D:
@@ -1588,7 +1588,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1271744380
 GameObject:
@@ -2072,7 +2072,7 @@ PrefabInstance:
     - target: {fileID: 1457183849893582740, guid: 587071ef8c2b2c1489309010590292de,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1457183849893582740, guid: 587071ef8c2b2c1489309010590292de,
         type: 3}
@@ -2110,6 +2110,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 9f60218f716eb1c4cbe76c1a71dfbc59,
         type: 2}
+    - target: {fileID: 5663324827067214817, guid: 587071ef8c2b2c1489309010590292de,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 351330882}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587071ef8c2b2c1489309010590292de, type: 3}
 --- !u!1 &1608500482
@@ -2467,14 +2472,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 2053995025}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f77a01486cfe1d24fa8e70c820456f17, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d1c368a6675ae24384e3f48ffdf177e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edgeOfWorld: {fileID: 380242490}
-  edgeOfWorld2: {fileID: 1084531996}
-  player: {fileID: 351330880}
-  smoothingSpeed: 0.05
-  offset: {x: 0, y: 0.25, z: -10}
+  target: {fileID: 351330880}
+  startPoint: {fileID: 380242490}
+  endPoint: {fileID: 1084531996}
+  smoothTime: 0.05
+  YMaxEnabled: 0
+  YMaxValue: 0
+  YMinEnabled: 1
+  YMinValue: -4
+  XMaxEnabled: 1
+  XMaxValue: 0
+  XMinEnabled: 1
+  XMinValue: 0
 --- !u!81 &2053995027
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2538,7 +2550,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0.17}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2075127797
 GameObject:

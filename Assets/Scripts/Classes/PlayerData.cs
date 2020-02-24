@@ -18,4 +18,11 @@ public class PlayerData
         this.cash = cash;
     }
 
+    public override string ToString()
+    {
+        string tmp;
+
+        tmp = "Location: " + this.location.ToString() + ", direction: " + this.direction + ", name: " + this.name + "...";
+        return tmp;
+    }
 }

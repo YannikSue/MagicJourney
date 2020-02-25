@@ -22,5 +22,8 @@ public class Cast : MonoBehaviour
 
     void Update() {
         this.transform.Translate(mousePos * Time.deltaTime * spellSpeed, Space.World);
+        
+    }
+
     }
 }

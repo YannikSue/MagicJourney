@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -36,7 +34,7 @@ public class Player : MonoBehaviour
     private void OnDisable()
     {
         PlayerPersistence.StoreData(this);
-        
+
     }
     void Start()
     {
@@ -46,9 +44,9 @@ public class Player : MonoBehaviour
         {
             //Vector3 offset = new Vector3(1f, -1.5f, transform.position.z);
             transform.position = startingPoint.position;
-            
+
         }
-        else if(playerData.direction == "goingLeft")
+        else if (playerData.direction == "goingLeft")
         {
 
             transform.position = startingPosition.initialValue;
@@ -62,7 +60,7 @@ public class Player : MonoBehaviour
         Jump();
         Dash();
         CastSpell();
-        
+
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         if (Input.GetAxisRaw("Horizontal") > 0 && !facingRight)
         {
@@ -106,8 +104,10 @@ public class Player : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
-    void CastSpell() {
-        if(Input.GetMouseButtonDown(0)){
+    void CastSpell()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
             GameObject spell = Instantiate(projectile, transform.position, Quaternion.identity);
             spell.GetComponent<Cast>().CastSpell(transform.position);
         }

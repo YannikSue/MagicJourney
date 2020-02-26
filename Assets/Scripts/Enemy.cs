@@ -31,9 +31,9 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         timePassed += Time.deltaTime;
-        //Debug.Log(timePassed.ToString());
+        
 
-        //CheckForPlayer();
+        CheckForPlayer();
 
         if (timePassed >= Time.deltaTime * 10)
         {
@@ -82,15 +82,20 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //public void CheckForPlayer()
-    //{
-    //    Vector3 offset = new Vector3(0, transform.position.y + 1f, 0);
-    //    RaycastHit2D playerInSight = Physics2D.Raycast(transform.position+offset, Vector2.right, 1.5f);
+    public void CheckForPlayer()
+    {
+        Vector3 offset = new Vector3(0.5f, 0, 0);
+        RaycastHit2D playerInSight = Physics2D.Raycast(transform.position + offset, Vector2.right, 0.5f);
 
-    //    if (playerInSight.collider == target.GetComponent<BoxCollider2D>())
-    //    {
-    //        Debug.Log("FOUND PLAYER; ATTACK!");
-    //        behavior = EnemyBehavior.attacking;
-    //    }
-    //}
+        //Debug.DrawRay(transform.position + offset, Vector2.right, Color.green);
+
+        if (playerInSight.collider != null && playerInSight.collider.CompareTag("Player"))
+        {
+
+            Debug.Log("FOUND PLAYER! ATTACK!");
+            behavior = EnemyBehavior.attacking;
+
+
+        }
+    }
 }

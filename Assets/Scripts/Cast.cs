@@ -5,6 +5,7 @@ public class Cast : MonoBehaviour
     private Vector3 mousePos;
     public float spellSpeed = 4f;
     public float spellDuration = 1f;
+    public int spellDamage = 20;
 
     public void CastSpell(Vector3 casterPos)
     {
@@ -23,4 +24,16 @@ public class Cast : MonoBehaviour
         this.transform.Translate(mousePos * Time.deltaTime * spellSpeed, Space.World);
     }
 
+    void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        Enemy enemy = hitInfo.GetComponent<Enemy>();
+
+        if (enemy != null)
+        {
+
+            enemy.TageDamage(spellDamage);
+        }
+        if(!hitInfo.GetComponent<Player>())
+        Destroy(gameObject);
+    }
 }

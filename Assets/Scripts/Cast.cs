@@ -33,7 +33,9 @@ public class Cast : MonoBehaviour
 
             enemy.TageDamage(spellDamage);
         }
+
         if(!hitInfo.GetComponent<Player>())
         Destroy(gameObject);
     }
+
 }

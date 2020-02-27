@@ -36,7 +36,7 @@ public class NewFollowTarget : MonoBehaviour
         Debug.Log("XMin: " + XMinValue + ", XMAX: " + XMaxValue);
     }
 
-    void FixedUpdate()
+    void Update()
     {
         Vector3 targetPos = target.position;
 

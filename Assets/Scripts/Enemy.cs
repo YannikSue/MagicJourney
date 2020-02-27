@@ -4,47 +4,55 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int health = 100;
     public GameObject deathEffect;
-    public EnemyBehavior behavior;
-    public float moveSpeed = 3f;
     public GameObject target;
-
+    public float moveSpeed = 1f;
+    public float patrolRange = 1f;
+    public float aggressionLevel = 1f;
+    public int health = 100;
 
     private bool facingRight = true;
-    private float timePassed;
-    private int direction = 1;
+    private bool startTimer = false;
+    private EnemyBehavior behavior;
+    private float timer = 4f;
+    private Vector3 spot1;
+    private Vector3 spot2;
 
-
-    public enum EnemyBehavior
+    private enum EnemyBehavior
     {
         idle,
-        patrolling,
-        attacking
+        attack
     }
 
-    void Awake()
+    void Start()
     {
         behavior = EnemyBehavior.idle;
+        spot1 = new Vector3(transform.position.x + patrolRange, transform.position.y);
+        spot2 = new Vector3(transform.position.x - patrolRange, transform.position.y);
     }
-
     void Update()
     {
-        timePassed += Time.deltaTime;
-        
 
-        CheckForPlayer();
-
-        if (timePassed >= Time.deltaTime * 10)
+        if (startTimer)
         {
-            Behavior();
-            timePassed = 0;
+            timer -= Time.deltaTime;
+
+            if (timer <= 0)
+            {
+                behavior = EnemyBehavior.idle;
+                timer = 4f;
+                startTimer = false;
+                Debug.Log("Must have been the wind!");
+            }
         }
+        CheckForPlayer();
+        Behavior();
     }
 
     public void TageDamage(int damage)
     {
         health -= damage;
+        behavior = EnemyBehavior.attack;
         if (health <= 0)
         {
             Die();
@@ -53,13 +61,10 @@ public class Enemy : MonoBehaviour
 
     public void Behavior()
     {
-
         switch (behavior)
         {
             case EnemyBehavior.idle: Move(); break;
-            case EnemyBehavior.patrolling: break;
-            case EnemyBehavior.attacking: break;
-
+            case EnemyBehavior.attack: Attack(); break;
             default: break;
         }
 
@@ -69,7 +74,31 @@ public class Enemy : MonoBehaviour
     public void Move()
     {
 
-        transform.Translate(Vector2.right * Time.deltaTime);
+        if (facingRight)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, spot1, moveSpeed * Time.deltaTime);
+
+            if (Vector2.Distance(transform.position, spot1) < 0.01f)
+            {
+
+                Debug.Log("Reached Point1");
+                Flip();
+
+            }
+        }
+        if (!facingRight)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, spot2, moveSpeed * Time.deltaTime);
+
+            if (Vector2.Distance(transform.position, spot2) < 0.01f)
+            {
+
+                Debug.Log("Reached Point2");
+                Flip();
+            }
+
+        }
+
 
     }
     void Flip()
@@ -77,25 +106,53 @@ public class Enemy : MonoBehaviour
         facingRight = !facingRight;
         transform.Rotate(0f, 180f, 0f);
     }
+
     public void Die()
     {
         Destroy(gameObject);
     }
 
-    public void CheckForPlayer()
+    void CheckForPlayer()
     {
-        Vector3 offset = new Vector3(0.5f, 0, 0);
-        RaycastHit2D playerInSight = Physics2D.Raycast(transform.position + offset, Vector2.right, 0.5f);
 
-        //Debug.DrawRay(transform.position + offset, Vector2.right, Color.green);
+        //Sichtfeld muss angepasst werden
 
-        if (playerInSight.collider != null && playerInSight.collider.CompareTag("Player"))
+        Vector3 offset;
+        Vector2 rayDirection;
+
+        if (facingRight)
         {
-
-            Debug.Log("FOUND PLAYER! ATTACK!");
-            behavior = EnemyBehavior.attacking;
-
-
+            offset = new Vector3(0.5f, 0, 0);
+            rayDirection = Vector2.right;
         }
+        else
+        {
+            offset = new Vector3(-0.5f, 0, 0);
+            rayDirection = Vector2.left;
+        }
+
+        RaycastHit2D detectionRay = Physics2D.Raycast(transform.position + offset, rayDirection, 0.5f * aggressionLevel);
+
+
+        if (detectionRay.collider != null && detectionRay.collider.CompareTag("Player"))
+        {
+            Debug.Log("FOUND PLAYER! ATTACK!");
+            behavior = EnemyBehavior.attack;
+        }
+        else if (behavior == EnemyBehavior.attack)
+        {
+            startTimer = true;
+        }
+    }
+
+    void Attack()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+
+        if (target.transform.position.x + 0.2f > transform.position.x && !facingRight)
+            Flip();
+
+        if (target.transform.position.x - 0.2f < transform.position.x && facingRight)
+            Flip();
     }
 }

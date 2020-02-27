@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public GameObject deathEffect;
     public GameObject target;
-
+    public Animator animator;
     public bool isRanged = false;
     public float moveSpeed = 1f;
     public float patrolRange = 1f;
@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     private float timer = 4f;
     private Vector3 spot1;
     private Vector3 spot2;
+    private Vector3 spawnPoint;
 
     private enum EnemyBehavior
     {
@@ -31,6 +32,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         behavior = EnemyBehavior.idle;
+        spawnPoint = transform.position;
         spot1 = new Vector3(transform.position.x + patrolRange, transform.position.y);
         spot2 = new Vector3(transform.position.x - patrolRange, transform.position.y);
     }
@@ -46,6 +48,11 @@ public class Enemy : MonoBehaviour
                 behavior = EnemyBehavior.idle;
                 timer = 4f;
                 startTimer = false;
+                if (transform.position.x < spawnPoint.x && !facingRight)
+                    Flip();
+                else if (transform.position.x > spawnPoint.x && facingRight)
+                    Flip();
+
                 Debug.Log("Must have been the wind!");
             }
         }
@@ -67,8 +74,8 @@ public class Enemy : MonoBehaviour
     {
         switch (behavior)
         {
-            case EnemyBehavior.idle: Move(); break;
-            case EnemyBehavior.attack: Attack(); break;
+            case EnemyBehavior.idle: Move(); animator.SetFloat("Speed", moveSpeed); break;
+            case EnemyBehavior.attack: Attack(); animator.SetFloat("Speed", moveSpeed); break;
             default: break;
         }
 

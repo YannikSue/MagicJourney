@@ -6,9 +6,13 @@ public class Enemy : MonoBehaviour
 {
     public GameObject deathEffect;
     public GameObject target;
+
+    public bool isRanged = false;
     public float moveSpeed = 1f;
     public float patrolRange = 1f;
     public float aggressionLevel = 1f;
+    public float nearDistance = 0.9f;
+    public float stoppingDistance = 1f;
     public int health = 100;
 
     private bool facingRight = true;
@@ -147,12 +151,34 @@ public class Enemy : MonoBehaviour
 
     void Attack()
     {
-        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
 
-        if (target.transform.position.x + 0.2f > transform.position.x && !facingRight)
-            Flip();
+        if (!isRanged)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
 
-        if (target.transform.position.x - 0.2f < transform.position.x && facingRight)
-            Flip();
+            if (target.transform.position.x + 0.2f > transform.position.x && !facingRight)
+                Flip();
+
+            if (target.transform.position.x - 0.2f < transform.position.x && facingRight)
+                Flip();
+        }
+        else
+        {
+            //shoot
+
+        if(Vector2.Distance(transform.position, target.transform.position) < nearDistance)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, target.transform.position, -moveSpeed * Time.deltaTime);
+                
+            }
+        else if(Vector2.Distance(transform.position, target.transform.position) > stoppingDistance)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+            }
+        else if(Vector2.Distance(transform.position, target.transform.position) < stoppingDistance && Vector2.Distance(transform.position, target.transform.position) > nearDistance)
+            {
+                transform.position = transform.position;
+            }
+        }
     }
 }

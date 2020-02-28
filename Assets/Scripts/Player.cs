@@ -62,19 +62,14 @@ public class Player : MonoBehaviour
         CastSpell();
 
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
+       
         if (Input.GetAxisRaw("Horizontal") > 0 && !facingRight)
-        {
-            //animator.SetFloat("Speed", moveSpeed);
             Flip();
-        }
         else if (Input.GetAxisRaw("Horizontal") < 0 && facingRight)
-        {
-            //animator.SetFloat("Speed", moveSpeed);
             Flip();
 
-
-        }
         transform.position += movement * Time.deltaTime * moveSpeed;
+        animator.SetFloat("Speed", Mathf.Abs(movement.x));
     }
 
 
@@ -82,8 +77,13 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
         {
+            animator.SetBool("Jumping", true);
             rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
 
+        }
+        else
+        {
+            animator.SetBool("Jumping", false);
         }
     }
 

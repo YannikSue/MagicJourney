@@ -9,6 +9,7 @@ public class IceSpearSpell : CastableSpell
     }
 
     public override void CastSpell(GameObject player) {
-        
+        GameObject iceSpear = MonoBehaviour.Instantiate(this.SpellPrefab, player.transform.position, player.transform.rotation) as GameObject;
+        iceSpear.GetComponent<IceSpearPrefabScript>().CastSpell(player.transform.position);
     }
 }

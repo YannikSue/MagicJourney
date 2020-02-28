@@ -9,6 +9,7 @@ public class ArcaneShieldSpell :  CastableSpell
     }
 
     public override void CastSpell(GameObject player) {
-        
+        GameObject shield = MonoBehaviour.Instantiate(this.SpellPrefab, player.transform.position, player.transform.rotation) as GameObject;
+        shield.GetComponent<ArcaneShieldPrefabScript>().CastSpell(player);
     }
 }

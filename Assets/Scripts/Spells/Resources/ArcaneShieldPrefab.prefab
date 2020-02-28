@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3891362699280186093}
   - component: {fileID: 7963297427108232468}
   - component: {fileID: 4507733559951503716}
+  - component: {fileID: 7971993273042771689}
   m_Layer: 0
-  m_Name: ArcaneShield
+  m_Name: ArcaneShieldPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,8 +69,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 805296483
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6e5fd88e8f538de44929b9da17d77929, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -92,9 +93,21 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0048475266, y: -0.05624926}
   m_Size: {x: 0.66315746, y: 0.75431323}
   m_Direction: 0
+--- !u!114 &7971993273042771689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4777003667145221062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3150110516cef4b4cbc130160d4cd05d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

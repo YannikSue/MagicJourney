@@ -19,11 +19,14 @@ public class Spellbook
         AllSpells.Add(new ArcaneShieldSpell("shieldSpell", "Arcane Shield", Resources.Load("ArcaneShieldPrefab") as GameObject));
 
         LearnSpell(AllSpells[0].GetID());
+        LearnSpell(AllSpells[1].GetID());
+        LearnSpell(AllSpells[2].GetID());
+
         SelectSpell(AllSpells[0].GetID());
     }
 
     public void CastSpell(){
-        SelectedSpell.TestCast();
+        SelectedSpell.CastSpell(this.Player);
     }
 
     public void SelectSpell(string id) {

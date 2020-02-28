@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &9082630371911688867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4423561733377880319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3672bdc548fbe6349accf56580c0662d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7227174819647785928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10,7 +22,7 @@ PrefabInstance:
     - target: {fileID: 6426549534398020407, guid: 76a2e0da605da0b49b83b9bd60bd60b6,
         type: 3}
       propertyPath: m_Name
-      value: fireBall
+      value: FireBallPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 6616184971046525450, guid: 76a2e0da605da0b49b83b9bd60bd60b6,
         type: 3}
@@ -67,5 +79,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 691498191269784199, guid: 76a2e0da605da0b49b83b9bd60bd60b6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 76a2e0da605da0b49b83b9bd60bd60b6, type: 3}
+--- !u!1 &4423561733377880319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6426549534398020407, guid: 76a2e0da605da0b49b83b9bd60bd60b6,
+    type: 3}
+  m_PrefabInstance: {fileID: 7227174819647785928}
+  m_PrefabAsset: {fileID: 0}

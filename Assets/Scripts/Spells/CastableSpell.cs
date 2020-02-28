@@ -4,10 +4,14 @@ using UnityEngine;
 
 public abstract class CastableSpell
 {
-    string SpellID;
-    string SpellName;
-    GameObject SpellPrefab;
-    bool Learned = false;
+    protected string SpellID;
+
+    protected string SpellName;
+
+    protected GameObject SpellPrefab;
+
+    protected bool Learned = false;
+
     public CastableSpell(string SpellID, string SpellName, GameObject SpellPrefab) {
         this.SpellID = SpellID;
         this.SpellName = SpellName;

@@ -25,10 +25,10 @@ public class SceneTransition : MonoBehaviour
 
             PlayerPersistence.StoreData(player);
 
-            Debug.Log(player.playerData);
+            //Debug.Log(player.playerData);
             playerStorage.initialValue = playerPosition;
             SceneManager.LoadScene(sceneToLoad);
-            Debug.Log("Changed Scene!");
+            //Debug.Log("Changed Scene!");
         }
     }
 }

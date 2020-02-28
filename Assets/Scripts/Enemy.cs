@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour
             if (Vector2.Distance(transform.position, spot1) < 0.01f)
             {
 
-                Debug.Log("Reached Point1");
+                //Debug.Log("Reached Point1");
                 Flip();
 
             }
@@ -104,7 +104,7 @@ public class Enemy : MonoBehaviour
             if (Vector2.Distance(transform.position, spot2) < 0.01f)
             {
 
-                Debug.Log("Reached Point2");
+                //Debug.Log("Reached Point2");
                 Flip();
             }
 
@@ -147,7 +147,7 @@ public class Enemy : MonoBehaviour
 
         if (detectionRay.collider != null && detectionRay.collider.CompareTag("Player"))
         {
-            Debug.Log("FOUND PLAYER! ATTACK!");
+            //Debug.Log("FOUND PLAYER! ATTACK!");
             behavior = EnemyBehavior.attack;
         }
         else if (behavior == EnemyBehavior.attack)

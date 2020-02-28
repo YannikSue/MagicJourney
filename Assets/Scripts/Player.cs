@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     private bool facingRight = true;
     public VectorValue startingPosition;
 
+    Spellbook Spellbook;
+
 
     // Start is called before the first frame update
     private void OnEnable()
@@ -38,6 +40,7 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
+        Spellbook = new Spellbook(gameObject);
         rb = gameObject.GetComponent<Rigidbody2D>();
 
         if (playerData.direction == "goingRight")
@@ -108,8 +111,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject spell = Instantiate(projectile, transform.position, Quaternion.identity);
-            spell.GetComponent<Cast>().CastSpell(transform.position);
+            this.Spellbook.CastSpell();
         }
     }
 }

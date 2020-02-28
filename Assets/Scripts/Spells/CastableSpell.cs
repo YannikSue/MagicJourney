@@ -8,7 +8,6 @@ public abstract class CastableSpell
     string SpellName;
     GameObject SpellPrefab;
     bool Learned = false;
-    bool Selected = false;
     public CastableSpell(string SpellID, string SpellName, GameObject SpellPrefab) {
         this.SpellID = SpellID;
         this.SpellName = SpellName;
@@ -32,14 +31,6 @@ public abstract class CastableSpell
 
     public bool HasBeenLearned() {
         return Learned;
-    }
-
-    public void SelectSpell(bool select) {
-        this.Selected = select;
-    }
-
-    public bool IsSelected() {
-        return Selected;
     }
 
     public string GetID(){

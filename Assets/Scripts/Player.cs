@@ -23,7 +23,9 @@ public class Player : MonoBehaviour
     private bool facingRight = true;
     public VectorValue startingPosition;
 
-    Spellbook Spellbook;
+    public Spellbook Spellbook;
+    public Canvas SpellMenuCanvas;
+    bool IsSpellMenuOpen = false;
 
 
     // Start is called before the first frame update
@@ -41,6 +43,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         Spellbook = new Spellbook(gameObject);
+        SpellMenuCanvas.GetComponent<SpellMenuCanvasScript>().UpdateLearnedSpells();
+
         rb = gameObject.GetComponent<Rigidbody2D>();
 
         if (playerData.direction == "goingRight")
@@ -63,6 +67,7 @@ public class Player : MonoBehaviour
         Jump();
         Dash();
         CastSpell();
+        OpenSpellMenu();
 
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         if (Input.GetAxisRaw("Horizontal") > 0 && !facingRight)
@@ -107,9 +112,19 @@ public class Player : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
+    void OpenSpellMenu() {
+        if(Input.GetKey(KeyCode.Tab) && !IsSpellMenuOpen){
+            IsSpellMenuOpen = true;
+            SpellMenuCanvas.enabled = true;
+        } else if(!Input.GetKey(KeyCode.Tab) && IsSpellMenuOpen) {
+            IsSpellMenuOpen = false;
+            SpellMenuCanvas.enabled = false;
+        }
+    }
+
     void CastSpell()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !IsSpellMenuOpen)
         {
             this.Spellbook.CastSpell();
         }

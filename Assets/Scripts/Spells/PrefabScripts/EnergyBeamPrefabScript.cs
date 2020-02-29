@@ -57,6 +57,7 @@ public class EnergyBeamPrefabScript : MonoBehaviour
         {
             this.lr.SetPosition(1, hit.point);
             this.ImpactObject.GetComponent<Transform>().position = hit.point;
+            this.distance = (hit.point - playerPos2d).magnitude;
         }
         else
         {

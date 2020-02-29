@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
                 else if (transform.position.x > spawnPoint.x && facingRight)
                     Flip();
 
-                Debug.Log("Must have been the wind!");
+                //Debug.Log("Must have been the wind!");
             }
         }
         CheckForPlayer();

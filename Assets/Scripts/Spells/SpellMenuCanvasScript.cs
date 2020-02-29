@@ -7,7 +7,7 @@ public class SpellMenuCanvasScript : MonoBehaviour
 {
     public GameObject Player;
 
-    public void UpdateLearnedSpells() {
+    public void UpdateLearnedSpells() { 
        foreach (Transform child in transform)
         {
             Button btn = child.GetComponent<Button>();

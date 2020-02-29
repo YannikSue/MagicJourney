@@ -22,10 +22,12 @@ public class Player : MonoBehaviour
     public bool firstInit;
     private bool facingRight = true;
     public VectorValue startingPosition;
+    public Camera MainCamera;
 
     public Spellbook Spellbook;
     public Canvas SpellMenuCanvas;
     bool IsSpellMenuOpen = false;
+    bool StartedCastingSpell = false;
 
 
     // Start is called before the first frame update
@@ -50,13 +52,11 @@ public class Player : MonoBehaviour
         if (playerData.direction == "goingRight")
         {
             //Vector3 offset = new Vector3(1f, -1.5f, transform.position.z);
-            transform.position = startingPoint.position;
-
+            //transform.position = startingPoint.position;
         }
         else if (playerData.direction == "goingLeft")
         {
-
-            transform.position = startingPosition.initialValue;
+            //transform.position = startingPosition.initialValue;
         }
     }
 
@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
     }
 
     void OpenSpellMenu() {
-        if(Input.GetKey(KeyCode.Tab) && !IsSpellMenuOpen){
+        if(Input.GetKey(KeyCode.Tab) && !IsSpellMenuOpen && !StartedCastingSpell){
             IsSpellMenuOpen = true;
             SpellMenuCanvas.enabled = true;
         } else if(!Input.GetKey(KeyCode.Tab) && IsSpellMenuOpen) {
@@ -126,7 +126,16 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && !IsSpellMenuOpen)
         {
-            this.Spellbook.CastSpell();
+            // responsible for spells which are cast continuously or require a cast time, other spells are "casted" directly from here
+            StartedCastingSpell = true;
+            this.Spellbook.StartCastSpell();
+        }
+
+        if (Input.GetMouseButtonUp(0) && StartedCastingSpell)
+        {
+            // spells  which are cast continuously or require a cast time are "charged" for as long as the player presses the button and are "fired" here
+            StartedCastingSpell = false;
+            this.Spellbook.EndCastSpell();
         }
     }
 }

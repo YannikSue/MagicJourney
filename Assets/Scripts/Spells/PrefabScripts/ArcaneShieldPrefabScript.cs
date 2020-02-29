@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class ArcaneShieldPrefabScript : MonoBehaviour
 {
-    float spellDuration = 5f;
-
     GameObject Player;
 
     public void CastSpell(GameObject player)
     {
         this.Player = player;
-        Destroy(gameObject, spellDuration);
+    }
+
+    public void EndCast()
+    {
+        Destroy(gameObject);
     }
 
     void Update()

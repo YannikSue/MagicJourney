@@ -22,6 +22,12 @@ public class Player : MonoBehaviour
     public bool firstInit;
     private bool facingRight = true;
     public VectorValue startingPosition;
+    public Camera MainCamera;
+
+    public Spellbook Spellbook;
+    public Canvas SpellMenuCanvas;
+    bool IsSpellMenuOpen = false;
+    bool StartedCastingSpell = false;
 
 
     // Start is called before the first frame update
@@ -38,18 +44,19 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
+        Spellbook = new Spellbook(gameObject);
+        SpellMenuCanvas.GetComponent<SpellMenuCanvasScript>().SetupButtons();
+
         rb = gameObject.GetComponent<Rigidbody2D>();
 
         if (playerData.direction == "goingRight")
         {
             //Vector3 offset = new Vector3(1f, -1.5f, transform.position.z);
-            transform.position = startingPoint.position;
-
+            //transform.position = startingPoint.position;
         }
         else if (playerData.direction == "goingLeft")
         {
-
-            transform.position = startingPosition.initialValue;
+            //transform.position = startingPosition.initialValue;
         }
     }
 
@@ -60,6 +67,7 @@ public class Player : MonoBehaviour
         Jump();
         Dash();
         CastSpell();
+        OpenSpellMenu();
 
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
        
@@ -104,12 +112,30 @@ public class Player : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
+    void OpenSpellMenu() {
+        if(Input.GetKey(KeyCode.Tab) && !IsSpellMenuOpen && !StartedCastingSpell){
+            IsSpellMenuOpen = true;
+            SpellMenuCanvas.enabled = true;
+        } else if(!Input.GetKey(KeyCode.Tab) && IsSpellMenuOpen) {
+            IsSpellMenuOpen = false;
+            SpellMenuCanvas.enabled = false;
+        }
+    }
+
     void CastSpell()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !IsSpellMenuOpen)
         {
-            GameObject spell = Instantiate(projectile, transform.position, Quaternion.identity);
-            spell.GetComponent<Cast>().CastSpell(transform.position);
+            // responsible for spells which are cast continuously or require a cast time, other spells are "casted" directly from here
+            StartedCastingSpell = true;
+            this.Spellbook.StartCastSpell();
+        }
+
+        if (Input.GetMouseButtonUp(0) && StartedCastingSpell)
+        {
+            // spells  which are cast continuously or require a cast time are "charged" for as long as the player presses the button and are "fired" here
+            StartedCastingSpell = false;
+            this.Spellbook.EndCastSpell();
         }
     }
 }

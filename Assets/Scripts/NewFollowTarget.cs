@@ -33,7 +33,7 @@ public class NewFollowTarget : MonoBehaviour
         float halfWidth = camera.aspect * halfHeigth;
         XMaxValue = endPoint.position.x - halfWidth;
         XMinValue = startPoint.position.x + halfWidth;
-        Debug.Log("XMin: " + XMinValue + ", XMAX: " + XMaxValue);
+        //Debug.Log("XMin: " + XMinValue + ", XMAX: " + XMaxValue);
     }
 
     void Update()

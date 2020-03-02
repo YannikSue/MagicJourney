@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         Spellbook = new Spellbook(gameObject);
-        SpellMenuCanvas.GetComponent<SpellMenuCanvasScript>().UpdateLearnedSpells();
+        SpellMenuCanvas.GetComponent<SpellMenuCanvasScript>().SetupButtons();
 
         rb = gameObject.GetComponent<Rigidbody2D>();
 

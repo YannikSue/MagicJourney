@@ -32,14 +32,20 @@ public class IceSpearPrefabScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
         Enemy enemy = hitInfo.GetComponent<Enemy>();
+        Debug.Log(hitInfo.gameObject.name);
 
         if (enemy != null)
         {
-
             enemy.TageDamage(spellDamage);
         }
 
         if (!hitInfo.GetComponent<Player>())
+        {
+            GameObject impactParticles = (Resources.Load("IceSpearImpact") as GameObject);
+
+            MonoBehaviour.Instantiate(impactParticles, gameObject.transform.position, new Quaternion());
+
             Destroy(gameObject);
+        }
     }
 }

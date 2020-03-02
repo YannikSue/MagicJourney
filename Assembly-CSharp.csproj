@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\Spells\PrefabScripts\EnergyBeamPrefabScript.cs" />
     <Compile Include="Assets\Scripts\Spells\PrefabScripts\FireBallPrefabScript.cs" />
     <Compile Include="Assets\Scripts\Spells\PrefabScripts\IceSpearPrefabScript.cs" />
+    <Compile Include="Assets\Scripts\Spells\PrefabScripts\SpellParticlesImpactScipt.cs" />
     <Compile Include="Assets\Scripts\Spells\SpellMenuCanvasScript.cs" />
     <Compile Include="Assets\Scripts\Spells\Spellbook.cs" />
     <Compile Include="Assets\Scripts\SwitchLevel.cs" />

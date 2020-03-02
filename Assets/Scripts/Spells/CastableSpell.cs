@@ -53,4 +53,9 @@ public abstract class CastableSpell
     public string GetID(){
         return SpellID;
     }
+
+    public string GetSpellName()
+    {
+        return this.SpellName;
+    }
 }

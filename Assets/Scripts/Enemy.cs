@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     public GameObject deathEffect;
     public GameObject target;
     public Animator animator;
+    public Transform attackPoint;
     public bool isRanged = false;
     public float moveSpeed = 1f;
     public float patrolRange = 1f;
@@ -91,24 +92,14 @@ public class Enemy : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, spot1, moveSpeed * Time.deltaTime);
 
             if (Vector2.Distance(transform.position, spot1) < 0.01f)
-            {
-
-                //Debug.Log("Reached Point1");
                 Flip();
-
-            }
         }
         if (!facingRight)
         {
             transform.position = Vector2.MoveTowards(transform.position, spot2, moveSpeed * Time.deltaTime);
 
             if (Vector2.Distance(transform.position, spot2) < 0.01f)
-            {
-
-                //Debug.Log("Reached Point2");
                 Flip();
-            }
-
         }
 
 
@@ -148,7 +139,7 @@ public class Enemy : MonoBehaviour
 
         if (detectionRay.collider != null && detectionRay.collider.CompareTag("Player"))
         {
-            //Debug.Log("FOUND PLAYER! ATTACK!");
+           
             behavior = EnemyBehavior.attack;
         }
         else if (behavior == EnemyBehavior.attack)
@@ -159,8 +150,7 @@ public class Enemy : MonoBehaviour
 
     void Attack()
     {
-        Vector3 offset;
-        Vector2 rayDirection;
+
 
         if (!isRanged)
         {
@@ -172,44 +162,32 @@ public class Enemy : MonoBehaviour
             if (target.transform.position.x - 0.2f < transform.position.x && facingRight)
                 Flip();
 
-            if (facingRight)
-            {
-                offset = new Vector3(0.25f, 0, 0);
-                rayDirection = Vector2.right;
-            }
-            else
-            {
-                offset = new Vector3(-0.25f, 0, 0);
-                rayDirection = Vector2.left;
-            }
-
-            RaycastHit2D meleeRange = Physics2D.Raycast(transform.position + offset, rayDirection, 0.02f);
-
-
-            if (meleeRange.collider != null && meleeRange.collider.CompareTag("Player"))
-            {
-                
-               attackScript.Attack();
-            }
-
         }
         else
         {
             //shoot
 
-        if(Vector2.Distance(transform.position, target.transform.position) < nearDistance)
+            if (Vector2.Distance(transform.position, target.transform.position) < nearDistance)
             {
                 transform.position = Vector2.MoveTowards(transform.position, target.transform.position, -moveSpeed * Time.deltaTime);
-                
+
             }
-        else if(Vector2.Distance(transform.position, target.transform.position) > stoppingDistance)
+            else if (Vector2.Distance(transform.position, target.transform.position) > stoppingDistance)
             {
                 transform.position = Vector2.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
             }
-        else if(Vector2.Distance(transform.position, target.transform.position) < stoppingDistance && Vector2.Distance(transform.position, target.transform.position) > nearDistance)
+            else if (Vector2.Distance(transform.position, target.transform.position) < stoppingDistance && Vector2.Distance(transform.position, target.transform.position) > nearDistance)
             {
                 transform.position = transform.position;
             }
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+
+        //needs counter to prevent killing the player in one second
+        if (collision.CompareTag("Player"))
+            attackScript.Attack();
     }
 }

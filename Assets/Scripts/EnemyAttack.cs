@@ -19,7 +19,10 @@ public class EnemyAttack : MonoBehaviour
 
         if (hitPlayer)
         {
-            hitPlayer.GetComponent<Player>().TakeDamage(meleeDamage);
+            Player player = hitPlayer.GetComponent<Player>();
+            if (player != null)
+                player.TakeDamage(meleeDamage);
+
             Debug.Log("Hit Player");
         }
 

@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
 
         if(health <= 0)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
     void Jump()

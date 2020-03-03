@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     public float nearDistance = 0.9f;
     public float stoppingDistance = 1f;
     public int health = 100;
+    public EnemyAttack attackScript;
 
     private bool facingRight = true;
     private bool startTimer = false;
@@ -133,12 +134,12 @@ public class Enemy : MonoBehaviour
 
         if (facingRight)
         {
-            offset = new Vector3(0.5f, 0, 0);
+            offset = new Vector3(0.25f, 0, 0);
             rayDirection = Vector2.right;
         }
         else
         {
-            offset = new Vector3(-0.5f, 0, 0);
+            offset = new Vector3(-0.25f, 0, 0);
             rayDirection = Vector2.left;
         }
 
@@ -158,6 +159,8 @@ public class Enemy : MonoBehaviour
 
     void Attack()
     {
+        Vector3 offset;
+        Vector2 rayDirection;
 
         if (!isRanged)
         {
@@ -168,6 +171,27 @@ public class Enemy : MonoBehaviour
 
             if (target.transform.position.x - 0.2f < transform.position.x && facingRight)
                 Flip();
+
+            if (facingRight)
+            {
+                offset = new Vector3(0.25f, 0, 0);
+                rayDirection = Vector2.right;
+            }
+            else
+            {
+                offset = new Vector3(-0.25f, 0, 0);
+                rayDirection = Vector2.left;
+            }
+
+            RaycastHit2D meleeRange = Physics2D.Raycast(transform.position + offset, rayDirection, 0.02f);
+
+
+            if (meleeRange.collider != null && meleeRange.collider.CompareTag("Player"))
+            {
+                
+               attackScript.Attack();
+            }
+
         }
         else
         {

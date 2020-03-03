@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public bool isGrounded = false;
     public float jumpForce = 10f;
     public float dashSpeed = 10f;
+    public int health = 200;
     public LayerMask groundLayer;
     public Transform groundCheck;
     public Transform startingPoint;
@@ -80,7 +81,15 @@ public class Player : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(movement.x));
     }
 
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
 
+        if(health <= 0)
+        {
+            Destroy(this);
+        }
+    }
     void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)

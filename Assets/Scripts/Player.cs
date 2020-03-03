@@ -116,9 +116,11 @@ public class Player : MonoBehaviour
         if(Input.GetKey(KeyCode.Tab) && !IsSpellMenuOpen && !StartedCastingSpell){
             IsSpellMenuOpen = true;
             SpellMenuCanvas.enabled = true;
+            Time.timeScale = 0.1f;
         } else if(!Input.GetKey(KeyCode.Tab) && IsSpellMenuOpen) {
             IsSpellMenuOpen = false;
             SpellMenuCanvas.enabled = false;
+            Time.timeScale = 1;
         }
     }
 

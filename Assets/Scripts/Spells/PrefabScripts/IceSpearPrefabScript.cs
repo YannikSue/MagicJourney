@@ -21,7 +21,7 @@ public class IceSpearPrefabScript : MonoBehaviour
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);
 
-        GameObject iceSpearTrail = MonoBehaviour.Instantiate(Resources.Load("IceSpearTrail") as GameObject, casterPos, new Quaternion());
+        GameObject iceSpearTrail = MonoBehaviour.Instantiate(Resources.Load("IceSpear/IceSpearTrail") as GameObject, casterPos, new Quaternion());
         iceSpearTrail.GetComponent<IceSpearTrailScript>().AddGameObject(gameObject);
 
         Destroy(gameObject, spellDuration);
@@ -44,7 +44,7 @@ public class IceSpearPrefabScript : MonoBehaviour
 
         if (!hitInfo.GetComponent<Player>())
         {
-            GameObject impactParticles = (Resources.Load("IceSpearImpact") as GameObject);
+            GameObject impactParticles = (Resources.Load("IceSpear/IceSpearImpact") as GameObject);
             MonoBehaviour.Instantiate(impactParticles, gameObject.transform.position, new Quaternion());
             Destroy(gameObject);
         }

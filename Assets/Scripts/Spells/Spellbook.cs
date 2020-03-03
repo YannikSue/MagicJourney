@@ -14,8 +14,8 @@ public class Spellbook
         this.Player = player;
 
         // TODO add spells to Spellbook in a different Way, not just in plain code, maybe by using file system? maybe static class of Spellbook?
-        AllSpells.Add(new FireBallSpell("fireballSpell", "Fireball", Resources.Load("FireBallPrefab") as GameObject));
-        AllSpells.Add(new IceSpearSpell("iceSpearSpell", "Ice Spear", Resources.Load("IceSpearPrefab") as GameObject));
+        AllSpells.Add(new FireBallSpell("fireballSpell", "Fireball", Resources.Load("Fireball/FireBallPrefab") as GameObject));
+        AllSpells.Add(new IceSpearSpell("iceSpearSpell", "Ice Spear", Resources.Load("IceSpear/IceSpearPrefab") as GameObject));
         AllSpells.Add(new ArcaneShieldSpell("shieldSpell", "Arcane Shield", Resources.Load("ArcaneShieldPrefab") as GameObject));
         AllSpells.Add(new EnergyBeamSpell("energyBeamSpell", "Energy Beam", Resources.Load("EnergyBeamPrefab") as GameObject));
 

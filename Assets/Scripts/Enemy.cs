@@ -203,7 +203,7 @@ public class Enemy : MonoBehaviour
     {
 
         //needs counter to prevent killing the player in one second
-        if (collision.CompareTag("Player") && !attackTimer)
+        if (collision.CompareTag("Player") && !attackTimer && !isRanged)
         {
             Debug.Log("Hitting Player");
             attackScript.Attack();

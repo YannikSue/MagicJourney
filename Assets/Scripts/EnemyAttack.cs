@@ -6,6 +6,7 @@ public class EnemyAttack : MonoBehaviour
 {
 
     public Transform attackPoint;
+    
     public float attackRange = 0.5f;
     public LayerMask playerLayer;
     public int meleeDamage = 20;

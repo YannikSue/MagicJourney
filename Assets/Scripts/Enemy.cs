@@ -14,13 +14,16 @@ public class Enemy : MonoBehaviour
     public float aggressionLevel = 1f;
     public float nearDistance = 0.9f;
     public float stoppingDistance = 1f;
+    public float attackSpeedValue = 2f;
     public int health = 100;
     public EnemyAttack attackScript;
 
     private bool facingRight = true;
     private bool startTimer = false;
+    private bool attackTimer = false;
     private EnemyBehavior behavior;
     private float timer = 4f;
+    private float attackSpeed = 10f;
     private Vector3 spot1;
     private Vector3 spot2;
     private Vector3 spawnPoint;
@@ -35,6 +38,7 @@ public class Enemy : MonoBehaviour
     {
         behavior = EnemyBehavior.idle;
         spawnPoint = transform.position;
+        attackSpeed = attackSpeedValue;
         spot1 = new Vector3(transform.position.x + patrolRange, transform.position.y);
         spot2 = new Vector3(transform.position.x - patrolRange, transform.position.y);
     }
@@ -58,6 +62,18 @@ public class Enemy : MonoBehaviour
                 //Debug.Log("Must have been the wind!");
             }
         }
+
+        if (attackTimer)
+        {
+            attackSpeed -= Time.deltaTime;
+
+            if(attackSpeed <= 0)
+            {
+                attackTimer = false;
+                attackSpeed = attackSpeedValue;
+            }
+        }
+
         CheckForPlayer();
         Behavior();
     }
@@ -187,7 +203,11 @@ public class Enemy : MonoBehaviour
     {
 
         //needs counter to prevent killing the player in one second
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !attackTimer)
+        {
+            Debug.Log("Hitting Player");
             attackScript.Attack();
+            attackTimer = true;
+        }
     }
 }

@@ -1057,6 +1057,7 @@ MonoBehaviour:
   attackPoint: {fileID: 550861762}
   isRanged: 0
   moveSpeed: 0.75
+  attackSpeed: 3
   patrolRange: 0.5
   aggressionLevel: 1
   nearDistance: 0.9

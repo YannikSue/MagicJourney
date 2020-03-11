@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
         {
             attackSpeed -= Time.deltaTime;
 
-            if(attackSpeed <= 0)
+            if (attackSpeed <= 0)
             {
                 attackTimer = false;
                 attackSpeed = attackSpeedValue;
@@ -155,7 +155,7 @@ public class Enemy : MonoBehaviour
 
         if (detectionRay.collider != null && detectionRay.collider.CompareTag("Player"))
         {
-           
+
             behavior = EnemyBehavior.attack;
         }
         else if (behavior == EnemyBehavior.attack)
@@ -178,6 +178,7 @@ public class Enemy : MonoBehaviour
             if (target.transform.position.x - 0.2f < transform.position.x && facingRight)
                 Flip();
 
+
         }
         else
         {
@@ -196,7 +197,15 @@ public class Enemy : MonoBehaviour
             {
                 transform.position = transform.position;
             }
+
+            if (!attackTimer)
+            {
+                attackScript.ShootArrow();
+                attackTimer = true;
+            }
+
         }
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)

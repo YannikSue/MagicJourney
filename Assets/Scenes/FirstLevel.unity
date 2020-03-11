@@ -1055,7 +1055,7 @@ MonoBehaviour:
   target: {fileID: 2069163201}
   animator: {fileID: 317771487}
   attackPoint: {fileID: 550861762}
-  isRanged: 0
+  isRanged: 1
   moveSpeed: 0.75
   patrolRange: 0.5
   aggressionLevel: 1
@@ -1077,6 +1077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 550861762}
+  arrow: {fileID: 6787036854974646190, guid: 9514b9b639fec1948ad6c643ccd0312c, type: 3}
   attackRange: 0.09
   playerLayer:
     serializedVersion: 2

@@ -6,6 +6,7 @@ public class EnemyAttack : MonoBehaviour
 {
 
     public Transform attackPoint;
+    public GameObject arrow;
     
     public float attackRange = 0.5f;
     public LayerMask playerLayer;
@@ -34,5 +35,12 @@ public class EnemyAttack : MonoBehaviour
         if (attackPoint != null)
             Gizmos.DrawWireSphere(attackPoint.position, attackRange);
 
+    }
+
+
+    public void ShootArrow()
+    {
+        Debug.Log("Tryíng to shoot the player!");
+        Instantiate(arrow, transform.position, transform.rotation);
     }
 }

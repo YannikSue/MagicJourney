@@ -13,23 +13,40 @@ public class EnemyProjectile : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-
-        //formel für Flugbahn
-        //Grad = arctan(y/x + Mathf.sqr("y²/(x²+1))
-        float x = player.transform.position.x;
-        float y = player.transform.position.y;
-        float erg = x / y + Mathf.Sqrt(Mathf.Pow(y, 2) / (Mathf.Pow(x, 2) + 1));
-        float launchAngle = Mathf.Atan(erg) * Mathf.Rad2Deg + 90;
-        //"Launchspeed fehlt"
-        //Vectorberechnung fehlt Vector2 arrowDirection = new Vector2(Mathf.cos(launchAngle), Mathf.sin(launchAngle));
-
-        float launchSpeed = Mathf.Sqrt(Mathf.Pow(x,2) + Mathf.Pow(y,2));
-        float Theta = Mathf.Atan(y / x) + 90;
-        Vector2 launchVector = new Vector2(Mathf.Cos(Theta), Mathf.Sin(Theta));
-
         rb = gameObject.GetComponent<Rigidbody2D>();
-        rb.AddForce(launchVector * speed, ForceMode2D.Impulse);
-    }
 
-    
+        //Distance between Player and Firepoint
+        float x = Vector2.Distance(player.transform.position, transform.position);
+
+        //height of firepoint
+        float h = Mathf.Abs(transform.position.y);
+
+        //angle required to find Theta
+        float phi = Mathf.Atan2(x, h) * Mathf.Rad2Deg;
+
+        //gravity
+        float g = Mathf.Abs(Physics2D.gravity.y);
+
+        //calculates the initial speed to hit at max range
+        float initialSpeed = Mathf.Sqrt((g * Mathf.Pow(x, 2)) / x * Mathf.Sin(2 * 45));
+        Debug.Log("InitialSpeed: " + initialSpeed);
+
+        //intermediate result for arcos
+        float intResult = ((g * Mathf.Pow(x, 2) / initialSpeed) - h) / Mathf.Sqrt(Mathf.Pow(h, 2) + Mathf.Pow(x, 2));
+
+        //launchangle theta
+        float theta = (Mathf.Acos(intResult) * Mathf.Rad2Deg + phi) / 2 + 90;
+
+        //convert degree to radiant 
+        theta *= Mathf.Deg2Rad;
+
+        //launchvector 
+        Vector2 launchVector = new Vector2(Mathf.Cos(theta), Mathf.Sin(theta));
+
+        //actually launches that shit
+        if (launchVector.x != float.NaN && launchVector.y != float.NaN)
+            rb.AddForce(launchVector * initialSpeed, ForceMode2D.Impulse);
+
+
+    }
 }

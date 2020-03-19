@@ -1058,9 +1058,9 @@ MonoBehaviour:
   isRanged: 1
   moveSpeed: 0.75
   patrolRange: 0.5
-  aggressionLevel: 1
-  nearDistance: 0.9
-  stoppingDistance: 1
+  aggressionLevel: 10
+  nearDistance: 1.37
+  stoppingDistance: 1.5
   attackSpeedValue: 0.5
   health: 100
   attackScript: {fileID: 317771493}
@@ -4169,7 +4169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2069163201}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.5003, y: -4.2934, z: 0}
+  m_LocalPosition: {x: -4.289, y: -4.278, z: 0}
   m_LocalScale: {x: 0.77622956, y: 0.8644267, z: 1}
   m_Children:
   - {fileID: 686803654}
